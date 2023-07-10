@@ -199,7 +199,8 @@ GR_RESULT GR_STDCALL grGetObjectInfo(
                 // No actual allocation will be done with a heap count of 0. See grAllocMemory.
                 .size = quirkHas(QUIRK_NON_ZERO_MEM_REQ) ? 4096 : 0,
                 .alignment = quirkHas(QUIRK_NON_ZERO_MEM_REQ) ? 4 : 0,
-                .heapCount = 0,
+                .heapCount = 1,
+                .heaps = { 2 },
             };
             break;
         default:
