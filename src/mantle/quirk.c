@@ -21,6 +21,8 @@ void quirkInit(
         mQuirks = QUIRK_NON_ZERO_MEM_REQ |
                   QUIRK_READ_ONLY_IMAGE_STATE_MISMATCH |
                   QUIRK_KEEP_VK_DEVICE;
+    } else if (!strcmp(appInfo->pAppName, "Thief")) {
+        mQuirks = QUIRK_NON_ZERO_MEM_REQ;
     }
 
     if (mQuirks != 0) {
