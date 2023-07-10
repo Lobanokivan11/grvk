@@ -22,6 +22,8 @@
 
 typedef enum {
     RES_TYPE_GENERIC,
+    RES_TYPE_SRV,
+    RES_TYPE_UAV,
     RES_TYPE_LDS,
     RES_TYPE_ATOMIC_COUNTER,
     RES_TYPE_PUSH_CONSTANTS,
@@ -1383,7 +1385,7 @@ static void emitTypedUav(
                 NO_STRIDE_INDEX);
 
     const IlcResource resource = {
-        .resType = RES_TYPE_GENERIC,
+        .resType = RES_TYPE_UAV,
         .id = resourceId,
         .typeId = imageId,
         .texelTypeId = sampledTypeId,
@@ -1428,7 +1430,7 @@ static void emitUav(
     }
 
     const IlcResource resource = {
-        .resType = RES_TYPE_GENERIC,
+        .resType = RES_TYPE_UAV,
         .id = resourceId,
         .typeId = arrayId,
         .texelTypeId = compiler->floatId,
@@ -1524,7 +1526,7 @@ static void emitSrv(
     }
 
     const IlcResource resource = {
-        .resType = RES_TYPE_GENERIC,
+        .resType = RES_TYPE_SRV,
         .id = resourceId,
         .typeId = arrayId,
         .texelTypeId = compiler->floatId,
@@ -2844,7 +2846,7 @@ static void emitUavLoad(
 {
     uint8_t ilResourceId = GET_BITS(instr->control, 0, 14);
 
-    const IlcResource* resource = findResource(compiler, RES_TYPE_GENERIC, ilResourceId);
+    const IlcResource* resource = findResource(compiler, RES_TYPE_UAV, ilResourceId);
     const Destination* dst = &instr->dsts[0];
 
     if (resource == NULL) {
@@ -2866,7 +2868,7 @@ static void emitUavStructLoad(
 {
     uint16_t ilResourceId = GET_BITS(instr->control, 0, 14);
 
-    const IlcResource* resource = findResource(compiler, RES_TYPE_GENERIC, ilResourceId);
+    const IlcResource* resource = findResource(compiler, RES_TYPE_UAV, ilResourceId);
     const Destination* dst = &instr->dsts[0];
 
     if (resource == NULL) {
@@ -2918,7 +2920,7 @@ static void emitUavStore(
 {
     uint8_t ilResourceId = GET_BITS(instr->control, 0, 14);
 
-    const IlcResource* resource = findResource(compiler, RES_TYPE_GENERIC, ilResourceId);
+    const IlcResource* resource = findResource(compiler, RES_TYPE_UAV, ilResourceId);
 
     if (resource == NULL) {
         LOGE("resource %d not found\n", ilResourceId);
@@ -2940,7 +2942,7 @@ static void emitUavRawStructStore(
     bool isRaw = instr->opcode == IL_OP_UAV_RAW_STORE;
     uint16_t ilResourceId = GET_BITS(instr->control, 0, 14);
 
-    const IlcResource* resource = findResource(compiler, RES_TYPE_GENERIC, ilResourceId);
+    const IlcResource* resource = findResource(compiler, RES_TYPE_UAV, ilResourceId);
     const Destination* dst = &instr->dsts[0];
 
     if (resource == NULL) {
@@ -3032,7 +3034,7 @@ static void emitUavAtomicOp(
 {
     uint8_t ilResourceId = GET_BITS(instr->control, 0, 14);
 
-    const IlcResource* resource = findResource(compiler, RES_TYPE_GENERIC, ilResourceId);
+    const IlcResource* resource = findResource(compiler, RES_TYPE_UAV, ilResourceId);
 
     if (resource == NULL) {
         LOGE("resource %d not found\n", ilResourceId);
@@ -3171,7 +3173,7 @@ static void emitStructuredSrvLoad(
         numFormat = nfmt;
     }
 
-    const IlcResource* resource = findResource(compiler, RES_TYPE_GENERIC, ilResourceId);
+    const IlcResource* resource = findResource(compiler, RES_TYPE_SRV, ilResourceId);
     const Destination* dst = &instr->dsts[0];
 
     if (resource == NULL) {
