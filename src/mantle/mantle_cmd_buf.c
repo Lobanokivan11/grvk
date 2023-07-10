@@ -453,6 +453,10 @@ GR_VOID GR_STDCALL grCmdBindIndexData(
     const GrDevice* grDevice = GET_OBJ_DEVICE(grCmdBuffer);
     GrGpuMemory* grGpuMemory = (GrGpuMemory*)mem;
 
+    if (grGpuMemory == NULL) {
+        return;
+    }
+
     VKD.vkCmdBindIndexBuffer(grCmdBuffer->commandBuffer, grGpuMemory->buffer, offset,
                              getVkIndexType(indexType));
 }
