@@ -2614,6 +2614,10 @@ static void emitSample(
         IlcSpvId lodId = loadSource(compiler, &instr->srcs[1], COMP_MASK_XYZW, compiler->float4Id);
         operandIds[0] = emitVectorTrim(compiler, lodId, compiler->float4Id, COMP_INDEX_X, 1);
         operandIdCount++;
+    } else if (instr->opcode == IL_OP_SAMPLE_C) {
+        sampleOp = SpvOpImageSampleDrefImplicitLod;
+        drefId = loadSource(compiler, &instr->srcs[1], COMP_MASK_XYZW, compiler->float4Id);
+        drefId = emitVectorTrim(compiler, drefId, compiler->float4Id, COMP_INDEX_X, 1);
     } else if (instr->opcode == IL_OP_SAMPLE_C_LZ) {
         sampleOp = SpvOpImageSampleDrefExplicitLod;
         drefId = loadSource(compiler, &instr->srcs[1], COMP_MASK_XYZW, compiler->float4Id);
@@ -3502,6 +3506,7 @@ static void emitInstr(
     case IL_OP_SAMPLE_B:
     case IL_OP_SAMPLE_G:
     case IL_OP_SAMPLE_L:
+    case IL_OP_SAMPLE_C:
     case IL_OP_SAMPLE_C_LZ:
         emitSample(compiler, instr);
         break;

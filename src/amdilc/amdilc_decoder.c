@@ -59,6 +59,7 @@ static const OpcodeInfo mOpcodeInfos[IL_OP_LAST] = {
     [IL_OP_SAMPLE_B] = { IL_OP_SAMPLE_B, 1, 2, 0 },
     [IL_OP_SAMPLE_G] = { IL_OP_SAMPLE_G, 1, 3, 0 },
     [IL_OP_SAMPLE_L] = { IL_OP_SAMPLE_L, 1, 2, 0 },
+    [IL_OP_SAMPLE_C] = { IL_OP_SAMPLE_C, 1, 2, 0 },
     [IL_OP_SAMPLE_C_LZ] = { IL_OP_SAMPLE_C_LZ, 1, 2, 0 },
     [IL_OP_I_NOT] = { IL_OP_I_NOT, 1, 1, 0 },
     [IL_OP_I_OR] = { IL_OP_I_OR, 1, 2, 0 },
