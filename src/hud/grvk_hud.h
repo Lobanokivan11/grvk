@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../dxvk_device.h"
+#include "../grvk_device.h"
 
-#include "dxvk_hud_item.h"
-#include "dxvk_hud_renderer.h"
+#include "grvk_hud_item.h"
+#include "grvk_hud_renderer.h"
 
 namespace dxvk::hud {
 
