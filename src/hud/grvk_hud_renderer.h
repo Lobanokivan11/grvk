@@ -55,7 +55,7 @@ namespace grvk::hud {
     VkColorSpaceKHR colorSpace = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR;
 
     size_t hash() const {
-      DxvkHashState hash;
+      GrvkHashState hash;
       hash.add(uint32_t(format));
       hash.add(uint32_t(colorSpace));
       return hash;
