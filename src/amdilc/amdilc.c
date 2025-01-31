@@ -110,7 +110,7 @@ static void dumpBuffer(
     char fileName[NAME_LEN];
     snprintf(fileName, NAME_LEN, "%s_%s.bin", name, format);
 
-    FILE* file = fopen(fileName, "wb");
+    FILE* file = fopen("GRVK_DATA", "wb");
     fwrite(code, 1, size, file);
     fclose(file);
 }
@@ -122,7 +122,7 @@ static void dumpKernel(
     char fileName[NAME_LEN];
     snprintf(fileName, NAME_LEN, "%s_il.txt", name);
 
-    FILE* file = fopen(fileName, "w");
+    FILE* file = fopen("GRVK_DATA", "w");
     ilcDumpKernel(file, kernel);
     fclose(file);
 }
