@@ -1,9 +1,9 @@
-#include "dxvk_hud_renderer.h"
+#include "grvk_hud_renderer.h"
 
 #include <hud_text_frag.h>
 #include <hud_text_vert.h>
 
-namespace dxvk::hud {
+namespace grvk::hud {
   
   struct HudGlyphGpuData {
     int16_t x;
