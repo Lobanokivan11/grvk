@@ -1,8 +1,8 @@
 #include <cstring>
 
-#include "dxvk_hud.h"
+#include "grvk_hud.h"
 
-namespace dxvk::hud {
+namespace grvk::hud {
   
   Hud::Hud(
     const Rc<DxvkDevice>& device)
