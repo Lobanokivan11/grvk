@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../dxvk_device.h"
+#include "../grvk_device.h"
 
-#include "dxvk_hud_font.h"
+#include "grvk_hud_font.h"
 
-namespace dxvk::hud {
+namespace grvk::hud {
 
   /**
    * \brief HUD options
@@ -96,17 +96,17 @@ namespace dxvk::hud {
   public:
     
     HudRenderer(
-      const Rc<DxvkDevice>&   device);
+      const Rc<GrvkDevice>&   device);
     
     ~HudRenderer();
 
     void beginFrame(
-      const DxvkContextObjects& ctx,
-      const Rc<DxvkImageView>&  dstView,
+      const GrvkContextObjects& ctx,
+      const Rc<GrvkImageView>&  dstView,
       const HudOptions&         options);
 
     void endFrame(
-      const DxvkContextObjects& ctx);
+      const GrvkContextObjects& ctx);
 
     void drawText(
             uint32_t            size,
@@ -115,7 +115,7 @@ namespace dxvk::hud {
       const std::string&        text);
 
     void drawTextIndirect(
-      const DxvkContextObjects& ctx,
+      const GrvkContextObjects& ctx,
       const HudPipelineKey&     key,
       const VkDescriptorBufferInfo& drawArgs,
       const VkDescriptorBufferInfo& drawInfos,
@@ -123,12 +123,12 @@ namespace dxvk::hud {
             uint32_t            drawCount);
 
     void flushDraws(
-      const DxvkContextObjects& ctx,
-      const Rc<DxvkImageView>&  dstView,
+      const GrvkContextObjects& ctx,
+      const Rc<GrvkImageView>&  dstView,
       const HudOptions&         options);
 
     HudPipelineKey getPipelineKey(
-      const Rc<DxvkImageView>&  dstView) const;
+      const Rc<GrvkImageView>&  dstView) const;
 
     HudSpecConstants getSpecConstants(
       const HudPipelineKey&     key) const;
@@ -146,15 +146,15 @@ namespace dxvk::hud {
 
   private:
 
-    Rc<DxvkDevice>          m_device;
+    Rc<GrvkDevice>          m_device;
 
-    Rc<DxvkBuffer>          m_fontBuffer;
-    Rc<DxvkImage>           m_fontTexture;
-    Rc<DxvkImageView>       m_fontTextureView;
-    Rc<DxvkSampler>         m_fontSampler;
+    Rc<GrvkBuffer>          m_fontBuffer;
+    Rc<GrvkImage>           m_fontTexture;
+    Rc<GrvkImageView>       m_fontTextureView;
+    Rc<GrvkSampler>         m_fontSampler;
 
-    Rc<DxvkBuffer>          m_textBuffer;
-    Rc<DxvkBufferView>      m_textBufferView;
+    Rc<GrvkBuffer>          m_textBuffer;
+    Rc<GrvkBufferView>      m_textBufferView;
 
     std::vector<HudTextDrawInfo>  m_textDraws;
     std::vector<char>             m_textData;
@@ -168,12 +168,12 @@ namespace dxvk::hud {
     HudPushConstants        m_pushConstants = { };
 
     std::unordered_map<HudPipelineKey,
-      VkPipeline, DxvkHash, DxvkEq> m_textPipelines;
+      VkPipeline, GrvkHash, GrvkEq> m_textPipelines;
 
     void createFontResources();
 
     void uploadFontResources(
-      const DxvkContextObjects& ctx);
+      const GrvkContextObjects& ctx);
 
     VkDescriptorSetLayout createSetLayout();
 
